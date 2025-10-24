@@ -21,12 +21,16 @@ module Libraree
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.time_zone = "Jakarta"
+
+    # Load app configs from config/parkeeconfig.yml
+    config.mbg = config_for(:librareeconfig)
   end
 end
