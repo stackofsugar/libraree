@@ -1,13 +1,18 @@
 module Authentication
+  include LoggingHelper
   extend ActiveSupport::Concern
 
   included do
-    before_action :require_authentication
+    before_action :require_authentication, :require_admin
   end
 
   class_methods do
     def allow_unauthenticated_access(**options)
-      skip_before_action :require_authentication, **options
+      skip_before_action :require_authentication, :require_admin, **options
+    end
+
+    def allow_non_admin(**options)
+      skip_before_action :require_admin, **options
     end
   end
 
@@ -18,6 +23,11 @@ module Authentication
 
     def require_authentication
       resume_session || forbidden
+    end
+
+    def require_admin
+      user = resume_session.user
+      user.is_admin ? resume_session : forbidden
     end
 
     def forbidden
