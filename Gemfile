@@ -50,4 +50,8 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  # Use Ruby LSP and Rubocop for intellisense and linting
+  gem "ruby-lsp"
+  gem "rubocop", require: false
 end
