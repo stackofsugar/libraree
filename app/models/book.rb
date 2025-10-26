@@ -1,5 +1,5 @@
 class Book < ApplicationRecord
-  include HumanID
+  include HumanId
 
   has_one :borrowing, dependent: :destroy
 

@@ -1,4 +1,4 @@
-module HumanID
+module HumanId
   extend ActiveSupport::Concern
 
   included do

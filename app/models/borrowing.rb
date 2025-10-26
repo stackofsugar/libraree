@@ -1,5 +1,5 @@
 class Borrowing < ApplicationRecord
-  include HumanID
+  include HumanId
 
   belongs_to :book
   belongs_to :user
