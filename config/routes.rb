@@ -11,9 +11,10 @@ Rails.application.routes.draw do
 
     # Business Logic
     resources :borrowers, param: :human_id
-    resources :books,     param: :human_id
+    resources :books,     param: :isbn
     resource :borrows do
-      get "active", on: :member
+      get "all", on: :member
+      get "return", on: :member
     end
   end
   resolve("Borrow") { [ :borrow ] }
