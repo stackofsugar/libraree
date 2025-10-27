@@ -20,3 +20,27 @@
 end.tap do |ins|
   User.upsert_all(ins)
 end
+
+[
+  "Nectar in a Sieve", "The Widening Gyre", "A Monstrous Regiment of Women", "Noli Me Tangere",
+  "Alone on a Wide Wide Sea", "Mr Standfast", "Fear and Trembling", "Number the Stars",
+  "Beyond the Mexique Bay", "The Yellow Meads of Asphodel", "The Torment of Others", "A Many-Splendoured Thing",
+  "The House of Mirth", "The Skull Beneath the Skin", "Cabbages and Kings", "Stranger in a Strange Land",
+  "Moab Is My Washpot", "A Handful of Dust", "Tirra Lirra by the River", "Frequent Hearses",
+  "The Line of Beauty", "Nine Coaches Waiting", "The Last Enemy", "Waiting for the Barbarians",
+  "For a Breath I Tarry", "Ah Wilderness!", "Time To Murder And Create", "To Sail Beyond the Sunset",
+  "Beneath the Bleeding", "This Lime Tree Bower", "The World the Flesh and the Devil", "Vanity Fair",
+  "The Moving Toyshop", "The Painted Veil", "This Side of Paradise", "A Scanner Darkly",
+  "Blood's a Rover", "Recalled to Life", "The Glory and the Dream", "Clouds of Witness",
+  "Cover Her Face", "The Way of All Flesh", "Butter In a Lordly Dish", "Carrion Comfort",
+  "A Time to Kill", "Consider Phlebas", "To Your Scattered Bodies Go", "The Man Within",
+  "Rosemary Sutcliff", "For Whom the Bell Tolls",
+].map do |title|
+  {
+    title: title,
+    isbn: rand(10000000000..99999999999),
+    stock: rand(0..10),
+  }
+end.tap do |ins|
+  Book.upsert_all(ins)
+end
