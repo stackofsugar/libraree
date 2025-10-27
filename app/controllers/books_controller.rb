@@ -1,4 +1,4 @@
-class BookController < ApplicationController
+class BooksController < ApplicationController
   include LoggingHelper
 
   def index

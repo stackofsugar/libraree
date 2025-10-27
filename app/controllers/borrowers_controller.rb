@@ -1,4 +1,4 @@
-class BorrowerController < ApplicationController
+class BorrowersController < ApplicationController
   include LoggingHelper
 
   def index

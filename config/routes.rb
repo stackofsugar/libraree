@@ -10,8 +10,11 @@ Rails.application.routes.draw do
     post "logout", to: "sessions#destroy", as: :logout
 
     # Business Logic
-    resources :borrower, param: :email_address
-    resources :book,     param: :human_id
-    resources :borrow,   param: :human_id
+    resources :borrowers, param: :human_id
+    resources :books,     param: :human_id
+    resource :borrows do
+      get "active", on: :member
+    end
   end
+  resolve("Borrow") { [ :borrow ] }
 end
