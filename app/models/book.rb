@@ -1,6 +1,4 @@
 class Book < ApplicationRecord
-  include HumanId
-
   has_one :borrowing, dependent: :destroy
 
   validates :title, length: { in: 3..300 }

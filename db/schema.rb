@@ -15,19 +15,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_24_112147) do
   enable_extension "pg_catalog.plpgsql"
 
   create_table "books", force: :cascade do |t|
-    t.string "human_id", limit: 16, null: false
     t.string "title", limit: 300, null: false
     t.string "isbn", limit: 17, null: false
     t.integer "stock", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["human_id"], name: "index_books_on_human_id", unique: true
     t.index ["isbn"], name: "index_books_on_isbn", unique: true
   end
 
   create_table "borrowings", force: :cascade do |t|
     t.string "human_id", limit: 16, null: false
     t.date "return_date", null: false
+    t.date "returned_at"
     t.bigint "book_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false

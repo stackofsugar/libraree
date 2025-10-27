@@ -4,6 +4,7 @@ class CreateBorrowings < ActiveRecord::Migration[8.0]
       t.string :human_id, null: false, limit: 16
 
       t.date :return_date, null: false
+      t.date :returned_at, null: true
       t.references :book, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true
 
