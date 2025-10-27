@@ -30,6 +30,10 @@ module Authentication
       user.is_admin ? resume_session : forbidden
     end
 
+    def current_user
+      Current.user ||= resume_session.user
+    end
+
     def forbidden
       render status: :forbidden, location: login_path
     end
