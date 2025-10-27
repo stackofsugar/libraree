@@ -8,10 +8,14 @@ class BooksController < ApplicationController
     ).order(:stock).order(updated_at: :desc)
   end
 
+  def show
+    render json: Book.select(:id, :title, :isbn, :stock).find_by!(isbn: params[:isbn])
+  end
+
   def create
     @book = Book.new(book_params)
     if @book.save
-      render json: @book, location: borrower_index_path
+      render json: @book
     else
       render json: @book.errors, status: :unprocessable_entity
     end
