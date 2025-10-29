@@ -3,7 +3,7 @@ class BorrowsController < ApplicationController
   allow_non_admin only: %i[ show create return ]
 
   def all
-    render json: (Borrowing.includes(:book, :user).order("returned_at DESC NULLS FIRST", updated_at: :desc).map do |borrow|
+    render json: (Borrowing.includes(:book, :user).order(Arel.sql("returned_at DESC NULLS FIRST"), updated_at: :desc).map do |borrow|
       {
         id: borrow.id,
         return_date: borrow.return_date,
@@ -15,6 +15,7 @@ class BorrowsController < ApplicationController
           name: borrow.user.name,
           email_address: borrow.user.email_address,
         },
+        late: borrow.returned_at ? (borrow.returned_at > borrow.return_date) : nil,
         updated_at: borrow.updated_at,
       }
     end)
