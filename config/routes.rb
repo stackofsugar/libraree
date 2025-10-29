@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
     # Authentication
     post "login",  to: "sessions#create",  as: :login
-    get "test",  to: "sessions#show",  as: :test
+    get "me",  to: "sessions#show",  as: :me
     post "logout", to: "sessions#destroy", as: :logout
 
     # Business Logic
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :books,     param: :isbn
     resource :borrows do
       get "all", on: :member
-      get "return", on: :member
+      post "return", on: :member
     end
   end
   resolve("Borrow") { [ :borrow ] }
