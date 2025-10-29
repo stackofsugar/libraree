@@ -6,43 +6,54 @@ postgresql: &postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+sqlite: &sqlite
+  adapter: sqlite3
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
 # =========================================================================
 # Development
 # =========================================================================
-development: &development
-  <<: *postgresql
-  database: libraree
-  username: postgres
-  password: postgres
-  host: 127.0.0.1
+# Using Postgres
+# development: &development
+#   <<: *postgresql
+#   database: libraree
+#   username: postgres
+#   password: postgres
+#   host: 127.0.0.1
 
+# Using SQLite
+development: &development
+  <<: *sqlite
+  database: storage/development.sqlite3
+#
 # =========================================================================
 # Testing
 # =========================================================================
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
-  <<: *development
-  database: librareetest
+# test:
+#   <<: *development
+#   database: librareetest
 
 # =========================================================================
 # Deployment
 # =========================================================================
-production:
-  primary: &production
-    <<: *postgresql
-    url: <%= ENV["POSTGRES_URL"] %>
-    database: rails_example_production
-  cache:
-    <<: *production
-    database: rails_example_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *production
-    database: rails_example_production_queue
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *production
-    database: rails_example_production_cable
-    migrations_paths: db/cable_migrate
+# production:
+#   primary: &production
+#     <<: *postgresql
+#     url: <%= ENV["POSTGRES_URL"] %>
+#     database: rails_example_production
+#   cache:
+#     <<: *production
+#     database: rails_example_production_cache
+#     migrations_paths: db/cache_migrate
+#   queue:
+#     <<: *production
+#     database: rails_example_production_queue
+#     migrations_paths: db/queue_migrate
+#   cable:
+#     <<: *production
+#     database: rails_example_production_cable
+#     migrations_paths: db/cable_migrate
