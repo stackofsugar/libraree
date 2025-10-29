@@ -1,3 +1,5 @@
+PASSWORD = BCrypt::Password.create("password", cost: 12)
+
 [
   "Julian McGrath", "Benjamin Parsons", "Anne Buckland", "Jane Wallace", "Kimberly Walker",
   "Joan Baker", "Irene Parsons", "Elizabeth Edmunds", "Ella Kerr", "Leonard Wilson",
@@ -14,7 +16,7 @@
     name: name,
     email_address: name.sub(" ", "").downcase + "@example.com",
     id_card_number: rand(10000..99999),
-    password_digest: BCrypt::Password.create(name.split.first.downcase + "Libraree123", cost: 12),
+    password_digest: PASSWORD,
     is_admin: (index % 10) == 0
   }
 end.tap do |ins|
