@@ -1,11 +1,19 @@
 class BooksController < ApplicationController
   include LoggingHelper
+  allow_non_admin only: %i[ index show ]
 
   def index
-    render json: Book.select(
-      :id, :human_id, :title,
-      :isbn, :stock, :updated_at
-    ).order(:stock).order(updated_at: :desc)
+    if params[:in_stock]
+      render json: Book.select(
+        :id, :title,
+        :isbn, :stock, :updated_at
+        ).where("stock > 0").order(:stock).order(updated_at: :desc)
+    else
+      render json: Book.select(
+        :id, :title,
+        :isbn, :stock, :updated_at
+        ).order(:stock).order(updated_at: :desc)
+    end
   end
 
   def show
